@@ -8,7 +8,7 @@
     tools:context="jp.gr.java_conf.s_takahashi.gacha.MainActivity">
 
     <LinearLayout
-        android:id="@+id/LinearLayout1"
+        android:id="@+id/sub_LinearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -19,7 +19,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView1"
+                android:id="@+id/sub_textView1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -32,7 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editText1"
+                android:id="@+id/sub_editText1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
@@ -49,12 +49,12 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/sub_textView2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="回数"
+                android:text="期待確率(%)"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -62,7 +62,37 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/sub_editText2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_weight="2"
+                android:ems="10"
+                android:gravity="right"
+                android:inputType="numberDecimal"
+                android:maxLength="5" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/sub_textView3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:text="1回の価格(円)"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/sub_editText3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
@@ -70,33 +100,33 @@
                 android:ems="10"
                 android:gravity="right"
                 android:inputType="number"
-                android:maxLength="7" />
+                android:maxLength="5" />
 
         </LinearLayout>
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnCalc"
+        android:id="@+id/sub_btnCalc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="false"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="false"
-        android:layout_below="@+id/LinearLayout1"
+        android:layout_below="@+id/sub_LinearLayout1"
         android:text="計算"
         tools:layout_width="wrap_content" />
 
     <TextView
-        android:id="@+id/lblResult"
+        android:id="@+id/sub_lblResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnCalc"
+        android:layout_below="@+id/sub_btnCalc"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp" />
 
     <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
+        android:id="@+id/sub_adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
