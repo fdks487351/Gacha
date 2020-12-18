@@ -30,18 +30,16 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
         AdView adView = (AdView) findViewById(R.id.adView);
         adView.loadAd(adRequest);
 
-        EditText editRate = (EditText) findViewById(R.id.editRate);
-        editRate.addTextChangedListener(this);
-
-        RadioGroup radioRensu = (RadioGroup) findViewById(R.id.radioRensu);
-        radioRensu.setOnCheckedChangeListener(this);
+        ((EditText)findViewById(R.id.editRate)).addTextChangedListener(this);
+        ((EditText)findViewById(R.id.editSpecialRate)).addTextChangedListener(this);
+        ((RadioGroup)findViewById(R.id.radioRensu)).setOnCheckedChangeListener(this);
+        ((EditText)findViewById(R.id.editKaisu)).addTextChangedListener(this);
 
         calc();
     }
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
     }
 
     @Override
@@ -76,15 +74,10 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
         // 提供割合
         EditText etRate = (EditText) findViewById(R.id.editRate);
         String str_rate = etRate.getText().toString();
-        double rate = Double.parseDouble(str_rate);
 
         // 特定枠
         EditText etSpRate = (EditText) findViewById(R.id.editSpecialRate);
         String str_special_rate = etSpRate.getText().toString();
-        double special_rate = 0;
-        if (!str_special_rate.isEmpty()) {
-            special_rate = Double.parseDouble(str_special_rate);
-        }
 
         // 連数
         int gacha_num = 10;
@@ -96,10 +89,10 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
         // 回数
         EditText etCount = (EditText) findViewById(R.id.editKaisu);
         String str_count= etCount.getText().toString();
-        int try_count = Integer.parseInt(str_count);
 
         // 入力チェック
         if (str_rate.isEmpty() || str_count.isEmpty()) {
+            findViewById(R.id.lblResult).setVisibility(View.INVISIBLE);
             findViewById(R.id.lblKaisubetu).setVisibility(View.INVISIBLE);
             findViewById(R.id.tosenHead).setVisibility(View.INVISIBLE);
             findViewById(R.id.tosen3).setVisibility(View.INVISIBLE);
@@ -107,6 +100,14 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
             findViewById(R.id.tosen1).setVisibility(View.INVISIBLE);
             return;
         }
+
+        // 型変換
+        double rate = Double.parseDouble(str_rate);
+        double special_rate = 0;
+        if (!str_special_rate.isEmpty()) {
+            special_rate = Double.parseDouble(str_special_rate);
+        }
+        int try_count = Integer.parseInt(str_count);
 
         // 計算
         double normal_per = rate / 100;
@@ -171,17 +172,18 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
         String result_msg = "";
         result_msg  = "提供割合が" + str_rate + "%";
         if (!str_special_rate.isEmpty()) {
-            result_msg += "（特定枠が" + special_rate + "%)";
+            result_msg += "(特定枠が" + str_special_rate + "%)";
         }
         result_msg += "の";
         if (gacha_num > 1) {
             result_msg += gacha_num + "連";
         }
-        result_msg += "ガチャを" + try_count + "回まわした場合に1つ以上当選する確率は" + String.format("%.5f", result_over[1]) + "%です";
+        result_msg += "ガチャを" + try_count + "回まわした場合に1つ以上当たる確率は" + String.format("%.5f", result_over[1]) + "%です";
 
         TextView tvResult = (TextView) findViewById(R.id.lblResult);
         tvResult.setText(result_msg);
 
+        findViewById(R.id.lblResult).setVisibility(View.VISIBLE);
         findViewById(R.id.lblKaisubetu).setVisibility(View.VISIBLE);
         findViewById(R.id.tosenHead).setVisibility(View.VISIBLE);
         findViewById(R.id.tosen3).setVisibility(View.VISIBLE);
