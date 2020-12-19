@@ -189,15 +189,15 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
         findViewById(R.id.lblResult).setVisibility(View.VISIBLE);
         findViewById(R.id.lblKaisubetu).setVisibility(View.VISIBLE);
         findViewById(R.id.tosenHead).setVisibility(View.VISIBLE);
-        findViewById(R.id.tosen3).setVisibility(View.VISIBLE);
-        findViewById(R.id.tosen2).setVisibility(View.VISIBLE);
         findViewById(R.id.tosen1).setVisibility(View.VISIBLE);
-        ((TextView)findViewById(R.id.textTosenNRate3)).setText(String.format("%.5f", result[3]));
-        ((TextView)findViewById(R.id.textTosenNRate2)).setText(String.format("%.5f", result[2]));
+        findViewById(R.id.tosen2).setVisibility(View.VISIBLE);
+        findViewById(R.id.tosen3).setVisibility(View.VISIBLE);
         ((TextView)findViewById(R.id.textTosenNRate1)).setText(String.format("%.5f", result[1]));
-        ((TextView)findViewById(R.id.textTosenNOverRate3)).setText(String.format("%.5f", result_over[3]));
-        ((TextView)findViewById(R.id.textTosenNOverRate2)).setText(String.format("%.5f", result_over[2]));
+        ((TextView)findViewById(R.id.textTosenNRate2)).setText(String.format("%.5f", result[2]));
+        ((TextView)findViewById(R.id.textTosenNRate3)).setText(String.format("%.5f", result[3]));
         ((TextView)findViewById(R.id.textTosenNOverRate1)).setText(String.format("%.5f", result_over[1]));
+        ((TextView)findViewById(R.id.textTosenNOverRate2)).setText(String.format("%.5f", result_over[2]));
+        ((TextView)findViewById(R.id.textTosenNOverRate3)).setText(String.format("%.5f", result_over[3]));
     }
 
     private void calc2() {
