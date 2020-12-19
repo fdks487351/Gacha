@@ -321,16 +321,36 @@
         android:text="参考"
         android:textStyle="bold"
         android:layout_below="@+id/tosen1"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="2dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp" />
 
     <TextView
-        android:id="@+id/textSanko"
+        android:id="@+id/textSanko50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lblSanko"
-        android:layout_marginLeft="20dp" />
+        android:textSize="12dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp" />
+
+    <TextView
+        android:id="@+id/textSanko90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textSanko50"
+        android:textSize="12dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp" />
+
+    <TextView
+        android:id="@+id/textSanko99"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textSanko90"
+        android:textSize="12dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"

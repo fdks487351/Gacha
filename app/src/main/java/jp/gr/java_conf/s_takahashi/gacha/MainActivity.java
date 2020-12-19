@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
         ((EditText)findViewById(R.id.editKaisu)).addTextChangedListener(this);
 
         calc();
+        calc2();
     }
 
     @Override
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
         calc();
+        calc2();
     }
 
     @Override
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
         calc();
+        calc2();
     }
 
     /* 組み合わせ */
@@ -178,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
         if (gacha_num > 1) {
             result_msg += gacha_num + "連";
         }
-        result_msg += "ガチャを" + try_count + "回まわした場合に1つ以上当たる確率は" + String.format("%.5f", result_over[1]) + "%です";
+        result_msg += "ガチャを" + try_count + "回引いた時に1つ以上当たる確率は" + String.format("%.5f", result_over[1]) + "%です";
 
         TextView tvResult = (TextView) findViewById(R.id.lblResult);
         tvResult.setText(result_msg);
@@ -195,6 +198,116 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
         ((TextView)findViewById(R.id.textTosenNOverRate3)).setText(String.format("%.5f", result_over[3]));
         ((TextView)findViewById(R.id.textTosenNOverRate2)).setText(String.format("%.5f", result_over[2]));
         ((TextView)findViewById(R.id.textTosenNOverRate1)).setText(String.format("%.5f", result_over[1]));
+    }
+
+    private void calc2() {
+//        /* 提供割合 */
+//        var rate = parseFloat(document.getElementById("rate").value);
+//        /* 特定枠 */
+//        var str_special_rate = document.getElementById("special_rate").value;
+//        var special_rate = 0;
+//        if (str_special_rate != "") {
+//            special_rate = parseFloat(str_special_rate);
+//        }
+//        /* 連数 */
+//        var gacha_num = parseFloat(document.getElementById("gacha_num").value);
+
+        // 提供割合
+        EditText etRate = (EditText) findViewById(R.id.editRate);
+        String str_rate = etRate.getText().toString();
+
+        // 特定枠
+        EditText etSpRate = (EditText) findViewById(R.id.editSpecialRate);
+        String str_special_rate = etSpRate.getText().toString();
+
+        // 連数
+        int gacha_num = 10;
+        RadioButton radio = (RadioButton) findViewById(R.id.radioRensu1);
+        if (radio.isChecked()) {
+            gacha_num = 1;
+        }
+
+        // 回数
+        EditText etCount = (EditText) findViewById(R.id.editKaisu);
+        String str_count= etCount.getText().toString();
+
+        // 入力チェック
+        if (str_rate.isEmpty() || str_count.isEmpty()) {
+            findViewById(R.id.lblSanko).setVisibility(View.VISIBLE);
+            findViewById(R.id.textSanko50).setVisibility(View.VISIBLE);
+            findViewById(R.id.textSanko90).setVisibility(View.VISIBLE);
+            findViewById(R.id.textSanko99).setVisibility(View.VISIBLE);
+            return;
+        }
+
+        // 型変換
+        double rate = Double.parseDouble(str_rate);
+        double special_rate = 0;
+        if (!str_special_rate.isEmpty()) {
+            special_rate = Double.parseDouble(str_special_rate);
+        }
+        int try_count = Integer.parseInt(str_count);
+
+        double[] expect_per = {50, 90, 99};
+        double[] result = {0, 0, 0};
+
+        /* 計算 */
+//        double normal_per           = rate / 100;
+//        double normal_per_miss      = 1 - normal_per;
+//        if (str_special_rate == "") {
+//            var special_per      = normal_per;
+//            var special_per_miss = normal_per_miss;
+//        } else {
+//            var special_per      = special_rate / 100;
+//            var special_per_miss = 1 - special_per;
+//        }
+        double normal_per = rate / 100;
+        double normal_per_miss = 1 - normal_per;
+        double special_per_miss;
+
+        if (str_special_rate.isEmpty()) {
+            special_per_miss = normal_per_miss;
+        } else {
+            double special_per = special_rate / 100;
+            special_per_miss = 1 - special_per;
+        }
+        double per_miss = Math.pow(normal_per_miss, (gacha_num - 1)) * special_per_miss;
+        double per_miss_log = Math.log(per_miss);
+        for (int i = 0; i < result.length; i++) {
+            double expect_per_miss = 1 - expect_per[i] / 100;
+            double expect_per_miss_log = Math.log(expect_per_miss);
+            result[i] = Math.round(expect_per_miss_log / per_miss_log);
+        }
+
+        /* 結果表示 */
+        findViewById(R.id.lblSanko).setVisibility(View.VISIBLE);
+        for (int i = 0; i < result.length; i++) {
+            String reference_msg = "";
+            if (gacha_num > 1) {
+                reference_msg += gacha_num;
+                reference_msg += "連";
+            }
+            reference_msg += "ガチャを";
+            reference_msg += (int)result[i];
+            reference_msg += "回引くと約";
+            reference_msg += (int)expect_per[i];
+            reference_msg += "%の確率で1つ以上当たります";
+
+            TextView textSanko = null;
+            switch (i) {
+                case 0:
+                    textSanko = (TextView)findViewById(R.id.textSanko50);
+                    break;
+                case 1:
+                    textSanko = (TextView)findViewById(R.id.textSanko90);
+                    break;
+                case 2:
+                    textSanko = (TextView)findViewById(R.id.textSanko99);
+                    break;
+            }
+            textSanko.setVisibility(View.VISIBLE);
+            textSanko.setText(reference_msg);
+        }
     }
 
     @Override
