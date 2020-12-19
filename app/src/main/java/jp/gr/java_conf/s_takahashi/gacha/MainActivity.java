@@ -334,7 +334,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.finish:
-                finish();
+                finishAndRemoveTask();
                 break;
         }
         return super.onOptionsItemSelected(item);
