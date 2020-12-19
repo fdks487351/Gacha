@@ -6,10 +6,12 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
@@ -20,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity implements TextWatcher, RadioGroup.OnCheckedChangeListener {
 
     private AdRequest adRequest;
+    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
         setContentView(R.layout.activity_main);
 
         adRequest = new AdRequest.Builder().build();
-        AdView adView = (AdView) findViewById(R.id.adView);
+        adView = (AdView) findViewById(R.id.adView);
         adView.loadAd(adRequest);
 
         ((EditText)findViewById(R.id.editRate)).addTextChangedListener(this);
@@ -37,6 +40,15 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
 
         calc();
         calc2();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        ScrollView scrollView = (ScrollView) findViewById(R.id.scroll);
+        ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams)scrollView.getLayoutParams();
+        marginLayoutParams.height = scrollView.getHeight() - 120;
+        scrollView.setLayoutParams(marginLayoutParams);
     }
 
     @Override
