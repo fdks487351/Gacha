@@ -42,14 +42,14 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
         calc2();
     }
 
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        ScrollView scrollView = (ScrollView) findViewById(R.id.scroll);
-        ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams)scrollView.getLayoutParams();
-        marginLayoutParams.height = scrollView.getHeight() - 120;
-        scrollView.setLayoutParams(marginLayoutParams);
-    }
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocus) {
+//        super.onWindowFocusChanged(hasFocus);
+//        ScrollView scrollView = (ScrollView) findViewById(R.id.scroll);
+//        ViewGroup.MarginLayoutParams marginLayoutParams = (ViewGroup.MarginLayoutParams)scrollView.getLayoutParams();
+//        marginLayoutParams.height = scrollView.getHeight() - 120;
+//        scrollView.setLayoutParams(marginLayoutParams);
+//    }
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
