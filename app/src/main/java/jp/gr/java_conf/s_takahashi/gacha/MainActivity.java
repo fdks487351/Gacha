@@ -67,6 +67,18 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
+        RadioButton rensu1 = (RadioButton) findViewById(R.id.radioRensu1);
+        if (rensu1.isChecked()) {
+            TextView specialRate = (TextView) findViewById(R.id.editSpecialRate);
+            specialRate.setText("");
+            specialRate.setEnabled(false);
+        }
+        RadioButton rensu10 = (RadioButton) findViewById(R.id.radioReusu10);
+        if (rensu10.isChecked()) {
+            TextView specialRate = (TextView) findViewById(R.id.editSpecialRate);
+            specialRate.setEnabled(true);
+        }
+
         calc();
         calc2();
     }
