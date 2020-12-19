@@ -15,9 +15,10 @@ public class HelpActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        WebView webView = new WebView(this);
-//        setContentView(webView);
         setContentView(R.layout.activity_help);
+
+        setTitle("ガチャシミュレータ(ヘルプ)");
+
         WebView webView = (WebView)findViewById(R.id.helpWebView);
         webView.loadUrl(URL);
 

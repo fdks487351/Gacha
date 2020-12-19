@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setTitle("ガチャシミュレータ");
+
         adRequest = new AdRequest.Builder().build();
         adView = (AdView) findViewById(R.id.adView);
         adView.loadAd(adRequest);
@@ -222,17 +224,6 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
     }
 
     private void calc2() {
-//        /* 提供割合 */
-//        var rate = parseFloat(document.getElementById("rate").value);
-//        /* 特定枠 */
-//        var str_special_rate = document.getElementById("special_rate").value;
-//        var special_rate = 0;
-//        if (str_special_rate != "") {
-//            special_rate = parseFloat(str_special_rate);
-//        }
-//        /* 連数 */
-//        var gacha_num = parseFloat(document.getElementById("gacha_num").value);
-
         // 提供割合
         EditText etRate = (EditText) findViewById(R.id.editRate);
         String str_rate = etRate.getText().toString();
@@ -273,15 +264,6 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
         double[] result = {0, 0, 0};
 
         /* 計算 */
-//        double normal_per           = rate / 100;
-//        double normal_per_miss      = 1 - normal_per;
-//        if (str_special_rate == "") {
-//            var special_per      = normal_per;
-//            var special_per_miss = normal_per_miss;
-//        } else {
-//            var special_per      = special_rate / 100;
-//            var special_per_miss = 1 - special_per;
-//        }
         double normal_per = rate / 100;
         double normal_per_miss = 1 - normal_per;
         double special_per_miss;
@@ -334,16 +316,21 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
-
         return true;
     }
 
     // メニューアイテム選択イベント
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
         switch (item.getItemId()) {
+            case R.id.sub:
+                intent = new Intent(this, SubActivity.class);
+                startActivity(intent);
+                finish();
+                break;
             case R.id.help:
-                Intent intent = new Intent(this, HelpActivity.class);
+                intent = new Intent(this, HelpActivity.class);
                 startActivity(intent);
                 break;
             case R.id.finish:
