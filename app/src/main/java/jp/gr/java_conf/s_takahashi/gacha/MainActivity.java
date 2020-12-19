@@ -1,19 +1,16 @@
 package jp.gr.java_conf.s_takahashi.gacha;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.ScrollView;
 import android.widget.TextView;
-
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
@@ -345,6 +342,10 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.help:
+                Intent intent = new Intent(this, HelpActivity.class);
+                startActivity(intent);
+                break;
             case R.id.finish:
                 finishAndRemoveTask();
                 break;
