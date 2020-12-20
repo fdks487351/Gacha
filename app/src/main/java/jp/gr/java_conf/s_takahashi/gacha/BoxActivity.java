@@ -54,10 +54,10 @@ public class BoxActivity extends AppCompatActivity implements TextWatcher {
     }
 
     /* 組み合わせ */
-    private int combi(int a, int b)
+    private double combi(int a, int b)
     {
-        int x = 1;
-        int y = 1;
+        double x = 1;
+        double y = 1;
         for(int i = a; i > (a-b); i--) {
             x = x * i;
         }
@@ -102,6 +102,13 @@ public class BoxActivity extends AppCompatActivity implements TextWatcher {
         int win = Integer.parseInt(str_hit);
         int cnt = Integer.parseInt(str_kaisu);
 
+        // 入力チェック2
+        if (win > box || cnt > box) {
+            findViewById(R.id.lblResult).setVisibility(View.INVISIBLE);
+            findViewById(R.id.lblResultAll).setVisibility(View.INVISIBLE);
+            return;
+        }
+
         // 計算
         double numerator = 1;
         double denominator = 1;
@@ -110,22 +117,31 @@ public class BoxActivity extends AppCompatActivity implements TextWatcher {
             denominator *= (box - i);
         }
         double result1 = 1 - (numerator / denominator);
-//        result1 = (result1 * 100).toFixed(5);
         result1 = (result1 * 100);
         if (result1 < 0.00001) {
             result1 = 0.00001;
         }
-        if (box != cnt && result1 > 99.99999) {
+        if (result1 > 99.99999) {
             result1 = 99.99999;
         }
+        if (box == win || box == cnt) {
+            result1 = 100;
+        }
+
+        double factorial_win = factorial(win);
+        double factorial_box = factorial(box);
+        double factorial_box_win = factorial(box - win);
+        double factorial_cnt_win = combi(cnt, win);
         double result_all = (factorial(win) / (factorial(box) / factorial(box - win))) * combi(cnt, win);
-//        result_all = (result_all * 100).toFixed(5);
         result_all = (result_all * 100);
         if (result_all < 0.00001) {
             result_all = 0.00001;
         }
-        if (box != cnt && result_all > 99.99999) {
+        if (result_all > 99.99999) {
             result_all = 99.99999;
+        }
+        if (box == win || box == cnt) {
+            result_all = 100;
         }
 
         /* 結果表示 */
@@ -133,11 +149,13 @@ public class BoxActivity extends AppCompatActivity implements TextWatcher {
         findViewById(R.id.lblResult).setVisibility(View.VISIBLE);
         TextView tvResult = (TextView) findViewById(R.id.lblResult);
         tvResult.setText(result_msg);
-        if (win > 1 && win <= cnt) {
+        if (win > 1 && win <= cnt && !Double.isNaN(result_all)) {
             String result_all_msg = String.format("%.5f", result_all) + "%の確率で全部当たります。";
             findViewById(R.id.lblResultAll).setVisibility(View.VISIBLE);
             TextView tvResultAll = (TextView) findViewById(R.id.lblResultAll);
             tvResultAll.setText(result_all_msg);
+        } else {
+            findViewById(R.id.lblResultAll).setVisibility(View.INVISIBLE);
         }
     }
 

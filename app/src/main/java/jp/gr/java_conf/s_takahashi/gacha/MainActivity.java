@@ -83,10 +83,10 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
     }
 
     /* 組み合わせ */
-    private int combi(int a, int b)
+    private double combi(int a, int b)
     {
-        int x = 1;
-        int y = 1;
+        double x = 1;
+        double y = 1;
         for(int i = a; i > (a-b); i--) {
             x = x * i;
         }
@@ -213,8 +213,16 @@ public class MainActivity extends AppCompatActivity implements TextWatcher, Radi
         findViewById(R.id.lblKaisubetu).setVisibility(View.VISIBLE);
         findViewById(R.id.tosenHead).setVisibility(View.VISIBLE);
         findViewById(R.id.tosen1).setVisibility(View.VISIBLE);
-        findViewById(R.id.tosen2).setVisibility(View.VISIBLE);
-        findViewById(R.id.tosen3).setVisibility(View.VISIBLE);
+        if ((gacha_num * try_count) >= 2) {
+            findViewById(R.id.tosen2).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.tosen2).setVisibility(View.INVISIBLE);
+        }
+        if ((gacha_num * try_count) >= 3) {
+            findViewById(R.id.tosen3).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.tosen3).setVisibility(View.INVISIBLE);
+        }
         ((TextView)findViewById(R.id.textTosenNRate1)).setText(String.format("%.5f", result[1]));
         ((TextView)findViewById(R.id.textTosenNRate2)).setText(String.format("%.5f", result[2]));
         ((TextView)findViewById(R.id.textTosenNRate3)).setText(String.format("%.5f", result[3]));

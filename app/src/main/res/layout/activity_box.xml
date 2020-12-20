@@ -51,7 +51,7 @@
                         android:layout_weight="2"
                         android:ems="10"
                         android:gravity="center"
-                        android:inputType="numberDecimal"
+                        android:inputType="numberSigned"
                         android:text="100"/>
                 </LinearLayout>
 
@@ -83,7 +83,7 @@
                         android:layout_weight="2"
                         android:ems="10"
                         android:gravity="center"
-                        android:inputType="numberDecimal"
+                        android:inputType="numberSigned"
                         android:text="1" />
                 </LinearLayout>
 
@@ -115,7 +115,7 @@
                         android:layout_weight="2"
                         android:ems="10"
                         android:gravity="center"
-                        android:inputType="numberDecimal"
+                        android:inputType="numberSigned"
                         android:text="1" />
                 </LinearLayout>
             </LinearLayout>
