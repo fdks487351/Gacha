@@ -9,6 +9,10 @@
         android:title="ガチャシミュレータ(逆算)"
         />
     <item
+        android:id="@+id/box"
+        android:title="ボックスガチャシミュレータ"
+        />
+    <item
         android:id="@+id/help"
         android:title="ヘルプ"
         />

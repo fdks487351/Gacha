@@ -159,6 +159,11 @@ public class SubActivity extends AppCompatActivity implements TextWatcher, Radio
                 startActivity(intent);
                 finish();
                 break;
+            case R.id.box:
+                intent = new Intent(this, BoxActivity.class);
+                startActivity(intent);
+                finish();
+                break;
             case R.id.help:
                 intent = new Intent(this, HelpActivity.class);
                 startActivity(intent);

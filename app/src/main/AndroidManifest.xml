@@ -24,6 +24,9 @@
         <activity android:name=".SubActivity">
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".BoxActivity">
+            android:screenOrientation="portrait">
+        </activity>
         <activity android:name=".HelpActivity">
             android:screenOrientation="portrait">
         </activity>
